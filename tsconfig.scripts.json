@@ -1,0 +1,24 @@
+{
+  "compilerOptions": {
+    "allowJs": true,
+    "module": "commonjs",
+    "skipLibCheck": true,
+    "esModuleInterop": true,
+    "noImplicitAny": true,
+    "sourceMap": true,
+    "baseUrl": "./src",
+    "outDir": "dist_scripts",
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "paths": {
+      "*": ["node_modules/*"],
+      "@components/*": ["components/*"],
+      "@services/*": ["services/*"],
+      "@infra/*": ["infra/*"],
+      "@useCases/*": ["useCases/*"],
+      "@domain/*": ["domain/*"]
+    }
+  },
+  "include": ["src/services/**/*", "src/infra/**/*", "src/scripts/**/*"],
+  // "exclude": ["src/scripts"]
+}
