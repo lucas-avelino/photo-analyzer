@@ -4,7 +4,6 @@ import { Photo } from '@domain/Photo';
 import { getListOfImages, getQuantityOfImages } from '@services/ImageService';
 import { addNewPhotoFromPath } from '@useCases/AddNewPhotoFromPath';
 import React, { useState } from 'react';
-// import Styled from './style';
 
 interface IIndexProps {
 
@@ -25,7 +24,7 @@ export const Index: React.FC<IIndexProps> = (props: IIndexProps) => {
   const photosGroups = React.useMemo(() =>
     Object.entries(groupBy(
       getListOfImages()
-        .filter((_, i) => i > 100 * (page - 1) && i < 100 * page)
+        .filter((_, i) => i > 150 * (page - 1) && i < 150 * page)
         .map(obj => ({ ...obj, dtGroup: obj.createdDate.toISOString().split("T")[0] })),
       "dtGroup"
     ))
@@ -46,7 +45,7 @@ export const Index: React.FC<IIndexProps> = (props: IIndexProps) => {
     <button onClick={() => setPage(page + 1)}>Next Page</button>
 
     {photosGroups.map(([dtGroup, images]: [string, Array<Photo>]) =>
-      <ThumbnailContainer>
+      <ThumbnailContainer title={dtGroup}>
         {images.map((img: Photo, i: number) => <Thumbnail key={img.path} photo={img} />)}
       </ThumbnailContainer>
     )}

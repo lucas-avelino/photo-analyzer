@@ -9,3 +9,7 @@ export const Container = styled.div`
     margin-bottom: 4px;
   }
 `;
+
+export const Title = styled.h3`
+
+`;

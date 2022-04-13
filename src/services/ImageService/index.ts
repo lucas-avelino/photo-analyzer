@@ -1,11 +1,11 @@
 import { Photo } from "@domain/Photo";
 import { RealmInstance } from "@infra/DB";
-var fs = window.require('fs');
+// var fs = window.require('fs');
 
 export const getImage = async (imageId: string) => {
-  const file = fs.readFileSync(imageId);
-  const base64 = "data:image/png;base64," + new Buffer(file).toString("base64")
-  return base64;
+  // const file = fs.readFileSync(imageId);
+  // const base64 = "data:image/png;base64," + new Buffer(file).toString("base64")
+  return "";
 }
 
 export const getListOfImages = () => {
