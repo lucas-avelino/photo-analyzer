@@ -1,11 +1,11 @@
-import { Photo } from "@domain/Photo";
-import { RealmInstance } from "@infra/DB";
-// var fs = window.require('fs');
+import { Photo } from "../../domain/Photo";
+import { RealmInstance } from "../../infra/DB";
 
 export const getImage = async (imageId: string) => {
-  // const file = fs.readFileSync(imageId);
-  // const base64 = "data:image/png;base64," + new Buffer(file).toString("base64")
-  return "";
+  var fs = await window.require('fs');
+  const file = fs.readFileSync(imageId);
+  const base64 = "data:image/png;base64," + new Buffer(file).toString("base64")
+  return base64;
 }
 
 export const getListOfImages = () => {
@@ -22,15 +22,11 @@ export const imageExists = (path: string) => {
 
 export const createImage = (image: Photo) => {
   const realm = RealmInstance();
-  // const exists = realm.objects("Photos").filtered("path = $0", image.path)[0];
-  // if (!exists) {
-    realm.beginTransaction();
 
-    realm.create("Photos", { ...image })
+  realm.beginTransaction();
 
-    realm.commitTransaction();
+  realm.create("Photos", { ...image })
 
-  // }else{
-  //   console.log("Already exists")
-  // }
+  realm.commitTransaction();
+
 }
