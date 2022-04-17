@@ -27,8 +27,8 @@
  */
 
 // import './index.css';
-import { sync } from '@services/SyncService';
-sync();
+// import { sync } from '@services/SyncService';
+// sync();
 import './app';
 
 console.log('👋 This message is being logged by "renderer.js", included via webpack');

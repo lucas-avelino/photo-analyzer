@@ -8,7 +8,7 @@ export const getImage = async (imageId: string) => {
   return base64;
 }
 
-export const getListOfImages = () => {
+export const getListOfImages = async () => {
   return RealmInstance().objects("Photos").sorted("createdDate").toJSON();
 }
 
