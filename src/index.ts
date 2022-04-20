@@ -1,4 +1,4 @@
-// import { sync } from '@services/SyncService';
+import { sync } from '@services/SyncService';
 import { app, BrowserWindow } from 'electron';
 
 // import * as Realm from 'realm'
@@ -74,6 +74,6 @@ app.on('activate', () => {
     createWindow();
   }
 });
-// sync()
+sync()
 // In this file you can include the rest of your app's specific main process
 // code. You can also put them in separate files and import them here.

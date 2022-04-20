@@ -90,3 +90,4 @@ out/
 
 *.realm*
 dist_scripts
+data

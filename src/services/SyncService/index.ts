@@ -8,7 +8,7 @@ const workers = 20;
 const perWorker = 50;
 
 export const sync = async () => {
-
+  // spawn('node', [path.resolve("dist_scripts/scripts/RecognitionSystem/index.js")])
   glob(dir + '**/?(*.png|*.jpg|*.jpeg)', (err: any, re: string[]) => {
     if (re) {
       const toImport = re.filter(imageId => !imageExists(imageId));

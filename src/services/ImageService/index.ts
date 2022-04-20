@@ -12,6 +12,13 @@ export const getListOfImages = async () => {
   return RealmInstance().objects("Photos").sorted("createdDate").toJSON();
 }
 
+export const getListOfImagesNotProcessed = async () => {
+  return RealmInstance()
+    .objects("Photos")
+    .filter((v) => v.toJSON().status === "NOT_PROCESSED")
+    ;
+}
+
 export const getQuantityOfImages = () => {
   return RealmInstance().objects("Photos").length;
 }
