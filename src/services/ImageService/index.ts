@@ -1,5 +1,5 @@
 import { Photo } from "../../domain/Photo";
-import { RealmInstance } from "../../infra/DB";
+import { DBProcessSingleton } from "@services/DBProcess";
 
 export const getImage = async (imageId: string) => {
   var fs = await window.require('fs');
@@ -8,32 +8,16 @@ export const getImage = async (imageId: string) => {
   return base64;
 }
 
-export const getListOfImages = async () => {
-  return RealmInstance().objects("Photos").sorted("createdDate").toJSON();
+export const getListOfImages = async (): Promise<Array<Photo>> => {
+  const result = await DBProcessSingleton.sendMessageAsync("/getAll");
+  return JSON.parse(result).map((p: Photo) => ({ ...p, createdDate: new Date(p.createdDate) }));
 }
 
-export const getListOfImagesNotProcessed = async () => {
-  return RealmInstance()
-    .objects("Photos")
-    .filter((v) => v.toJSON().status === "NOT_PROCESSED")
-    ;
+export const getQuantityOfImages = async () => {
+  return 0;
 }
 
-export const getQuantityOfImages = () => {
-  return RealmInstance().objects("Photos").length;
+export const imageExists = async (path: string) => {
+  return false
 }
 
-export const imageExists = (path: string) => {
-  return RealmInstance().objects("Photos").filtered("path = $0", path)[0];
-}
-
-export const createImage = (image: Photo) => {
-  const realm = RealmInstance();
-
-  realm.beginTransaction();
-
-  realm.create("Photos", { ...image })
-
-  realm.commitTransaction();
-
-}

@@ -1,4 +1,4 @@
-import { createImage, imageExists } from "@services/ImageService";
+import { imageExists } from "@services/ImageService";
 
 var { create } = require('exif-parser');
 var fs = window.require('fs');
@@ -13,10 +13,10 @@ export const addNewPhotoFromPath = (imageId: string) => {
   const stats = fs.statSync(imageId);
   const data = create(file).parse();
 
-  createImage({
-    path: imageId,
-    createdDate: stats.mtime,
-    status: "NOT_PROCESSED",
-    ...data.imageSize
-  })
+  // createImage({
+  //   path: imageId,
+  //   createdDate: stats.mtime,
+  //   status: "NOT_PROCESSED",
+  //   ...data.imageSize
+  // })
 }

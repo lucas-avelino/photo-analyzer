@@ -91,3 +91,5 @@ out/
 *.realm*
 dist_scripts
 data
+*.acebase*
+toProcess.json

@@ -10,6 +10,7 @@
     "outDir": "dist_scripts",
     "moduleResolution": "node",
     "resolveJsonModule": true,
+    "allowSyntheticDefaultImports": true,
     "paths": {
       "*": ["node_modules/*"],
       "@components/*": ["components/*"],

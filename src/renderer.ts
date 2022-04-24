@@ -27,8 +27,10 @@
  */
 
 // import './index.css';
-// import { sync } from '@services/SyncService';
-// sync();
+import { sync } from '@services/SyncService';
+sync();
 import './app';
+// import { db } from "@infra/AceBaseDB";
+// console.log(db);
 
 console.log('👋 This message is being logged by "renderer.js", included via webpack');

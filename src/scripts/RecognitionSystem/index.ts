@@ -1,7 +1,7 @@
-import { getListOfImagesNotProcessed } from "../../services/ImageService"
+// import { getListOfImagesNotProcessed } from "../../services/ImageService"
 
-const main = async () => {
-  console.log(getListOfImagesNotProcessed())
-}
+// const main = async () => {
+//   console.log(getListOfImagesNotProcessed())
+// }
 
-main()
+// main()
