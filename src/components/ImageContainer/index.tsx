@@ -2,6 +2,7 @@ import { Thumbnail } from '@components/Thumbnail';
 import { ThumbnailContainer } from '@components/ThumbnailContainer';
 import { Virtualizer } from '@components/Virtualizer';
 import { Photo } from '@domain/Photo';
+import { deleteImage } from '@services/ImageService';
 import React, { EventHandler, ReactNode } from 'react';
 import { useCreateSelectedImagesContext } from '../../hooks/useSelectedImages';
 import { groupBy } from '../../utils/Array';
@@ -76,10 +77,10 @@ export const ImageContainer = React.memo(({ photos, ...props }: IImageContainerP
     })
   }, [quantityOfPhotos, dimensions]);
 
-  const [selectedImages, setSelectedImages] = React.useState<{ [k: string]: Array<String> }>({});
+  const [selectedImages, setSelectedImages] = React.useState<{ [k: string]: Array<string> }>({});
   const selectedImagesFlat = React.useMemo(() => (Object.values(selectedImages).flat()), [selectedImages])
 
-  const setSelectedGroup = (day: string, selectedList: Array<String>) => {
+  const setSelectedGroup = (day: string, selectedList: Array<string>) => {
     setSelectedImages((g) => ({ ...g, [day]: selectedList }))
   }
 
@@ -99,7 +100,9 @@ export const ImageContainer = React.memo(({ photos, ...props }: IImageContainerP
 
 
   return <div style={{ width: "100%", height: "100%" }} ref={container}>
-    <span>{selectedImagesFlat.length}/{quantityOfPhotos}</span>
+    <span>{selectedImagesFlat.length}/{quantityOfPhotos}</span> <button onClick={() => {
+      deleteImage(selectedImagesFlat)
+    }}>Delete</button>
     {quantityOfPhotos && memoVirtualizer}
   </div>
 

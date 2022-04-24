@@ -4,8 +4,8 @@ import { PhotoRepository } from './persistence/PhotoRepository'
 process.send("Starting DB process")
 const photoRepository = new PhotoRepository();
 
-const sendResponseToCommand = (command: string, response: string) => {
-  process.send(`${command}\n${response}`)
+const sendResponseToCommand = (id: string, response: string) => {
+  process.send(`${id}\n${response}`)
 }
 
 process.on("message", async (m: string) => {
@@ -33,6 +33,14 @@ process.on("message", async (m: string) => {
       sendResponseToCommand(id, JSON.stringify(result))
     } catch (error) {
       process.send("error: " + error)
+    }
+  }else if(command === "/deletePhotos"){
+    try {
+      await photoRepository.removeImages(JSON.parse(metadata));
+      sendResponseToCommand(id, "done")
+    } catch (error) {
+      process.send("error: " + error)
+
     }
   }
 

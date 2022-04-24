@@ -29,4 +29,11 @@ export class PhotoRepository {
       .ref("Photos")
       .push(image)
   }
+
+  removeImages = async (photosPaths: Array<string>) => {
+    await db
+      .query("Photos")
+      .filter("path", "in", photosPaths)
+      .remove()
+  }
 }
