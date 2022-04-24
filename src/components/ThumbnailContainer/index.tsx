@@ -9,6 +9,7 @@ interface IThumbnailContainerProps {
   children?: React.ReactNode;
   onSelectedToggle?: (state: boolean) => void;
   photos: Array<Photo>;
+  setSelectedGroup?: (groupName: string, paths: Array<string>) => void
 }
 
 export const ThumbnailContainer: React.FC<IThumbnailContainerProps> = (props) => {
@@ -41,6 +42,10 @@ export const ThumbnailContainer: React.FC<IThumbnailContainerProps> = (props) =>
       setSelected(false);
     }
   }
+
+  React.useEffect(() => {
+    props.setSelectedGroup(props.title, selectedItems)
+  }, [selectedItems.length])
 
   return <Styled.Container>
     <Styled.Header onClick={() => handleOnSelectedToggle()} onMouseOver={() => setOnMouseOver(true)} onMouseOut={() => setOnMouseOver(false)}>

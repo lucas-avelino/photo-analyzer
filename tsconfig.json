@@ -18,6 +18,7 @@
       "@services/*": ["src/services/*"],
       "@infra/*": ["src/infra/*"],
       "@useCases/*": ["src/useCases/*"],
+      "@hooks/*": ["src/hooks/*"],
       "@domain/*": ["src/domain/*"]
     }
   },

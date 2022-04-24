@@ -5,7 +5,7 @@ const path = window.require('path');
 const glob = window.require("glob");
 const { spawn } = window.require('child_process') as typeof ChildProcessType;
 
-const dir = "D:/Externo/Computador antigo/Documents/Pictures/";
+const dir = "D:/Externo/Backups/";
 const workers = 20;
 const perWorker = 50;
 const filePath = path.resolve("dist_scripts/scripts/SyncWorker/index.js");

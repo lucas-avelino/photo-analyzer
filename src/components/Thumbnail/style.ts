@@ -23,6 +23,8 @@ export const SelectedLayer = styled.div`
   height: 100%;
   padding: 8px;
   font-size:1.5rem;
+  cursor: pointer;
+  background: linear-gradient(146deg, rgba(128,99,255,1) 0%, rgba(0,212,255,0) 29%);
 `;
 
 export const ExpandedImageModal = styled.div`
