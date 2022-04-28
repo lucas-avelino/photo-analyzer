@@ -14,7 +14,7 @@ export const Index: React.FC<IIndexProps> = (props: IIndexProps) => {
 
   React.useEffect(() => {
     getListOfImages()
-      .then((d) => setPhotos(d))
+      .then((d) => setPhotos(d.sort((a, b) => a.createdDate.valueOf() - b.createdDate.valueOf())))
   }, [])
 
   return <React.Suspense fallback={<div>Carregando...</div>}>

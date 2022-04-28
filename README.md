@@ -6,8 +6,14 @@
 - [x] Implement delete selected photos
 - [x] Implement config file
 - [x] Improve database script command pipeline
-- [ ] Not call discovery threads when no file need to be import
-- [ ] Implement trash
-- [ ] Remove photo discovery from main thread
+- [x] Not call discovery threads when no file need to be import
+- [ ] UI Improves
+  - [ ] Create lateral menu
+  - [ ] Create visual selection pane
+  - [ ] Close photo on ESC
+  - [ ] Option menu on expanded photo
+  - [ ] Implement trash
+- [ ] Change database to work with TCP communication
 - [ ] Implement recognition pipeline
+- [ ] Remove photo discovery from main thread
 - [ ] Improve threads and scripting calls

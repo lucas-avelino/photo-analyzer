@@ -25,27 +25,27 @@ export const sync = async () => {
       console.log(`Found ${re.length} files need to import ${toImport.length}`);
       const chunks = chunkfy(toImport, perWorker);
 
+      if (toImport.length > 0) {
+        for (let i = 0; i < workers; i++) {
+          const child = spawnSyncer(chunks.pop());
 
-
-      for (let i = 0; i < workers; i++) {
-        const child = spawnSyncer(chunks.pop());
-
-        const onMessage = (m: string) => {
-          DBProcessSingleton.sendMessage(m.replace("/insert ", DBCommands.insertPhoto + "\n"));
-        }
-
-        const onClose = (code: any) => {
-          console.log(`child process<${i}> exited with code ${code}`);
-          const chunk = chunks.pop();
-          if (chunk) {
-            const newChild = spawnSyncer(chunks.pop());
-            newChild.on('close', onClose);
-            newChild.on('message', onMessage)
+          const onMessage = (m: string) => {
+            DBProcessSingleton.sendMessage(m.replace("/insert ", DBCommands.insertPhoto + "\n"));
           }
-        }
 
-        child.on('close', onClose);
-        child.on('message', onMessage)
+          const onClose = (code: any) => {
+            console.log(`child process<${i}> exited with code ${code}`);
+            const chunk = chunks.pop();
+            if (chunk) {
+              const newChild = spawnSyncer(chunks.pop());
+              newChild.on('close', onClose);
+              newChild.on('message', onMessage)
+            }
+          }
+
+          child.on('close', onClose);
+          child.on('message', onMessage)
+        }
       }
     }
   });
