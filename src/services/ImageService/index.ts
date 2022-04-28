@@ -2,6 +2,15 @@ import { Photo } from "../../domain/Photo";
 import { DBProcessSingleton } from "@services/DBProcess";
 import { JsonSerializationReplacer } from "realm";
 import * as FsType from "fs";
+import { Config } from "@main/config";
+import { DBCommands } from "@domain/commands";
+
+var fs = window.require('fs') as typeof FsType;
+
+if (!fs.existsSync(Config.trashDir)) {
+  console.log(`[Info]: trash can doesn't exists creating path`);
+  fs.mkdirSync(Config.trashDir)
+}
 
 export const getImage = async (imageId: string) => {
   var fs = await window.require('fs') as typeof FsType;
@@ -11,14 +20,18 @@ export const getImage = async (imageId: string) => {
 }
 
 export const getListOfImages = async (): Promise<Array<Photo>> => {
-  const result = await DBProcessSingleton.sendMessageAsync("/getAll");
+  const result = await DBProcessSingleton.sendMessageAsync(DBCommands.getPhotos);
   return JSON.parse(result).map((p: Photo) => ({ ...p, createdDate: new Date(p.createdDate) }));
 }
 
 export const deleteImage = async (listOfPath: Array<string>) => {
-  var fs = await window.require('fs') as typeof  FsType;
-  const result = await DBProcessSingleton.sendMessageAsync("/deletePhotos\n" + JSON.stringify(listOfPath));
-  listOfPath.forEach(path => fs.rmSync(path));
+  var fs = await window.require('fs') as typeof FsType;
+  const result = await DBProcessSingleton.sendMessageAsync(DBCommands.softDeletePhotos + "\n" + JSON.stringify(listOfPath));
+  listOfPath.forEach(path => {
+    console.log(Config.trashDir, { path, fileName: path.substring(path.lastIndexOf('/') + 1) })
+    fs.renameSync(path, Config.trashDir + path.substring(path.lastIndexOf('/') + 1))
+  });
+
   return result;
 }
 
@@ -27,6 +40,6 @@ export const getQuantityOfImages = async () => {
 }
 
 export const imageExists = async (path: string) => {
-  return false
+  return 
 }
 

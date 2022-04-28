@@ -17,6 +17,7 @@
       "@services/*": ["services/*"],
       "@infra/*": ["infra/*"],
       "@useCases/*": ["useCases/*"],
+      "@main/*": ["main/*"],
       "@domain/*": ["domain/*"]
     }
   },

@@ -28,8 +28,10 @@
 
 // import './index.css';
 import { sync } from '@services/SyncService';
+import { Config } from './main/config';
 sync();
 import './app';
+console.log(Config)
 // import { db } from "@infra/AceBaseDB";
 // console.log(db);
 

@@ -19,6 +19,7 @@
       "@infra/*": ["src/infra/*"],
       "@useCases/*": ["src/useCases/*"],
       "@hooks/*": ["src/hooks/*"],
+      "@main/*": ["src/main/*"],
       "@domain/*": ["src/domain/*"]
     }
   },

@@ -4,7 +4,10 @@
   - [x] Change threads to work with DB
 - [x] Implement single photo selection
 - [x] Implement delete selected photos
-- [ ] Implement trash 
+- [x] Implement config file
+- [x] Improve database script command pipeline
+- [ ] Not call discovery threads when no file need to be import
+- [ ] Implement trash
 - [ ] Remove photo discovery from main thread
 - [ ] Implement recognition pipeline
 - [ ] Improve threads and scripting calls

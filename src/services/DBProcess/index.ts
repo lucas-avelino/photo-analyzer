@@ -11,7 +11,7 @@ class DBProcess {
   constructor() {
     this.databaseProcess = spawn('node', [path.resolve("dist_scripts/scripts/DB/index.js"), ">", "dblog"], { cwd: './', stdio: ['ipc', 0, 1] });
     this.databaseProcess.on("message", (message: string) => {
-      // console.log("Message from DB ->>> " + message)
+      console.log("Message from DB ->>> " + message)
       if (message.includes("Message recived")) {
         return;
       }

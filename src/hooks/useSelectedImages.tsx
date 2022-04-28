@@ -17,7 +17,6 @@ export const useCreateSelectedImagesContext = () => {
   const [value, setValue] = React.useState<Array<string>>([]);
 
   const addImage = (p: string) => {
-    console.log("ADD")
     setValue((v) => [...v, p]);
   }
   const removeImage = (p: string) => {

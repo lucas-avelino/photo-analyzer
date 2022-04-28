@@ -17,7 +17,12 @@ export class PhotoRepository {
   }
 
   getListOfImages = async () => {
-    return Object.values((await db.ref("Photos").get()).val()) as Array<Photo>;
+    const result = await db
+      .query("Photos")
+      .filter("delete", '==', undefined)
+      .get();
+
+    return result.getValues() as Array<Photo>;
   }
 
   getQuantityOfImages = async () => {
@@ -34,6 +39,10 @@ export class PhotoRepository {
     await db
       .query("Photos")
       .filter("path", "in", photosPaths)
-      .remove()
+      .forEach((a) => {
+        a.ref.update({
+          delete: 1
+        })
+      })
   }
 }
