@@ -7,6 +7,8 @@ import { DBCommands } from "@domain/commands";
 
 var fs = window.require('fs') as typeof FsType;
 
+type QueryOperator = '<' | '<=' | '==' | '!=' | '>' | '>=' | 'exists' | '!exists' | 'between' | '!between' | 'like' | '!like' | 'matches' | '!matches' | 'in' | '!in' | 'has' | '!has' | 'contains' | '!contains';
+
 if (!fs.existsSync(Config.trashDir)) {
   console.log(`[Info]: trash can doesn't exists creating path`);
   fs.mkdirSync(Config.trashDir)
@@ -21,6 +23,11 @@ export const getImage = async (imageId: string) => {
 
 export const getListOfImages = async (): Promise<Array<Photo>> => {
   const result = await DBProcessSingleton.sendMessageAsync(DBCommands.getPhotos);
+  return JSON.parse(result).map((p: Photo) => ({ ...p, createdDate: new Date(p.createdDate) }));
+}
+
+export const queryPhotos = async (filter: Array<{ fieldName: string, operator: QueryOperator, value: any }>): Promise<Array<Photo>> => {
+  const result = await DBProcessSingleton.sendMessageAsync(DBCommands.queryPhotos + "\n" + JSON.stringify(filter));
   return JSON.parse(result).map((p: Photo) => ({ ...p, createdDate: new Date(p.createdDate) }));
 }
 
@@ -40,6 +47,6 @@ export const getQuantityOfImages = async () => {
 }
 
 export const imageExists = async (path: string) => {
-  return 
+  return
 }
 

@@ -1,7 +1,7 @@
 export enum DBCommands{
   softDeletePhotos = '/softDeletePhotos',
   getPhotos = '/getPhotos',
-  getDeletedPhotos = '/getDeletedPhotos',
+  queryPhotos = '/queryPhotos',
   photosExists = '/photosExists',
   insertPhoto = '/insertPhoto'
 }

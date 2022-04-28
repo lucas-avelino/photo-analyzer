@@ -100,10 +100,10 @@ export const ImageContainer = React.memo(({ photos, ...props }: IImageContainerP
 
 
   return <div style={{ width: "100%", height: "100%" }} ref={container}>
-    <span>{selectedImagesFlat.length}/{quantityOfPhotos}</span> <button onClick={() => {
+    {/* <span>{selectedImagesFlat.length}/{quantityOfPhotos}</span> <button onClick={() => {
       deleteImage(selectedImagesFlat)
-    }}>Delete</button>
-    {quantityOfPhotos && memoVirtualizer}
+    }}>Delete</button> */}
+    {quantityOfPhotos !== 0 && memoVirtualizer}
   </div>
 
 });

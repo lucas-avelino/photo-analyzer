@@ -8,11 +8,11 @@
 - [x] Improve database script command pipeline
 - [x] Not call discovery threads when no file need to be import
 - [ ] UI Improves
-  - [ ] Create lateral menu
-  - [ ] Create visual selection pane
+  - [x] Create lateral menu
+  - [ ] Create header feedback when select photos
   - [ ] Close photo on ESC
   - [ ] Option menu on expanded photo
-  - [ ] Implement trash
+  - [x] Implement trash
 - [ ] Change database to work with TCP communication
 - [ ] Implement recognition pipeline
 - [ ] Remove photo discovery from main thread

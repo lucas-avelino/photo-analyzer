@@ -4,7 +4,7 @@ import { db, PhotoRepository } from './persistence/PhotoRepository'
 export enum DBCommands {
   softDeletePhotos = '/softDeletePhotos',
   getPhotos = '/getPhotos',
-  getDeletedPhotos = '/getDeletedPhotos',
+  queryPhotos = '/queryPhotos',
   photosExists = '/photosExists',
   insertPhoto = '/insertPhoto'
 }
@@ -32,6 +32,14 @@ process.on("message", async (m: string) => {
       const imagesFound = (await photoRepository.imageExists(commandArray)) as unknown as Array<string>;
       const result = commandArray.filter((p: string) => !imagesFound.includes(p))
       sendResponseToCommand(id, JSON.stringify(result))
+    } catch (error) {
+      process.send("error: " + error)
+    }
+  } else if (command === DBCommands.queryPhotos) {
+    try {
+      const commandArray = JSON.parse(metadata);
+      const photos = (await photoRepository.queryListOfImages(commandArray)) as unknown as Array<string>;
+      sendResponseToCommand(id, JSON.stringify(photos))
     } catch (error) {
       process.send("error: " + error)
     }
